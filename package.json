@@ -1,10 +1,10 @@
 {
-  "name": "frappe-datatable",
-  "version": "0.0.0-development",
+  "name": "finergy-datatable",
+  "version": "1.16.4",
   "description": "A modern datatable library for the web",
-  "main": "dist/frappe-datatable.cjs.js",
-  "unpkg": "dist/frappe-datatable.min.js",
-  "jsdelivr": "dist/frappe-datatable.min.js",
+  "main": "dist/finergy-datatable.cjs.js",
+  "unpkg": "dist/finergy-datatable.min.js",
+  "jsdelivr": "dist/finergy-datatable.min.js",
   "scripts": {
     "start": "yarn run dev",
     "build": "rollup -c && NODE_ENV=production rollup -c",
@@ -34,24 +34,24 @@
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.11.0",
-    "http-server": "^0.11.1",
-    "mocha": "3.3.0",
-    "postcss-custom-properties": "^7.0.0",
-    "postcss-nested": "^3.0.0",
+    "http-server": "^14.1.1",
+    "mocha": "^10.0.0",
+    "postcss-custom-properties": "^12.1.8",
+    "postcss-nested": "^5.0.6",
     "rollup": "^0.59.4",
     "rollup-plugin-commonjs": "^8.3.0",
     "rollup-plugin-eslint": "^4.0.0",
     "rollup-plugin-json": "^2.3.0",
     "rollup-plugin-node-resolve": "^3.0.3",
-    "rollup-plugin-postcss": "^1.2.8",
+    "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-uglify-es": "^0.0.1",
-    "semantic-release": "^17.1.1",
+    "semantic-release": "^19.0.5",
     "start-server-and-test": "^1.4.1",
-    "travis-deploy-once": "^5.0.1"
+    "travis-deploy-once": "^3.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/frappe/datatable.git"
+    "url": "https://github.com/Finergyrs/datatable.git"
   },
   "keywords": [
     "datatable",
@@ -62,9 +62,9 @@
   "author": "Faris Ansari",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/frappe/datatable/issues"
+    "url": "https://github.com/Finergyrs/datatable/issues"
   },
-  "homepage": "https://frappe.io/datatable",
+  "homepage": "https://finergy-rs.fr/datatable",
   "dependencies": {
     "hyperlist": "^1.0.0-beta",
     "lodash": "^4.17.5",

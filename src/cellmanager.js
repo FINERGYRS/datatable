@@ -527,7 +527,7 @@ export default class CellManager {
                     const done = editor.setValue(value, rowIndex, col);
 
                     // update cell immediately
-                    this.updateCell(colIndex, rowIndex, value, true);
+                    this.updateCell(colIndex, rowIndex, value);
                     $cell.focus();
 
                     if (done && done.then) {
@@ -605,7 +605,7 @@ export default class CellManager {
             let rowIndex = i + focusedCell.rowIndex;
             row.forEach((cell, j) => {
                 let colIndex = j + focusedCell.colIndex;
-                this.updateCell(colIndex, rowIndex, cell, true);
+                this.updateCell(colIndex, rowIndex, cell);
             });
         });
     }
@@ -620,16 +620,16 @@ export default class CellManager {
         }
     }
 
-    updateCell(colIndex, rowIndex, value, refreshHtml = false) {
+    updateCell(colIndex, rowIndex, value) {
         const cell = this.datamanager.updateCell(colIndex, rowIndex, {
             content: value
         });
-        this.refreshCell(cell, refreshHtml);
+        this.refreshCell(cell);
     }
 
-    refreshCell(cell, refreshHtml = false) {
+    refreshCell(cell) {
         const $cell = $(this.selector(cell.colIndex, cell.rowIndex), this.bodyScrollable);
-        $cell.innerHTML = this.getCellContent(cell, refreshHtml);
+        $cell.innerHTML = this.getCellContent(cell);
     }
 
     toggleTreeButton(rowIndex, flag) {
@@ -804,7 +804,7 @@ export default class CellManager {
         `;
     }
 
-    getCellContent(cell, refreshHtml = false) {
+    getCellContent(cell) {
         const {
             isHeader,
             isFilter,
@@ -827,18 +827,15 @@ export default class CellManager {
         const hasDropdown = isHeader && cell.dropdown !== false;
         const dropdown = hasDropdown ? this.columnmanager.getDropdownHTML() : '';
 
-        let customFormatter = CellManager.getCustomCellFormatter(cell);
+        const customFormatter = cell.format || (cell.column && cell.column.format) || null;
+
         let contentHTML;
         if (isHeader || isFilter || !customFormatter) {
             contentHTML = cell.content;
         } else {
-            if (!cell.html || refreshHtml) {
-                const row = this.datamanager.getRow(cell.rowIndex);
-                const data = this.datamanager.getData(cell.rowIndex);
-                contentHTML = customFormatter(cell.content, row, cell.column, data);
-            } else {
-                contentHTML = cell.html;
-            }
+            const row = this.datamanager.getRow(cell.rowIndex);
+            const data = this.datamanager.getData(cell.rowIndex);
+            contentHTML = customFormatter(cell.content, row, cell.column, data);
         }
 
         cell.html = contentHTML;
@@ -887,9 +884,5 @@ export default class CellManager {
 
     selector(colIndex, rowIndex) {
         return `.dt-cell--${colIndex}-${rowIndex}`;
-    }
-
-    static getCustomCellFormatter(cell) {
-        return cell.format || (cell.column && cell.column.format) || null;
     }
 }
